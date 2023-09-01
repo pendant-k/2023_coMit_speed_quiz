@@ -24,7 +24,7 @@ This project has the following features:
 - leaderboard
 
 ## Documentation
-해당 프로젝트는 2023년 2학기 CoMit 홍보부스에서 활용하기위해 제작된 스피드 퀴즈 앱입니다. data class 생성을 용이하게 하기위해 freezed패키지를 사용했습니다. 이에 따라서 code generation을 적극적으로 활용하고 있습니다. 반드시 실행 전에 code generation을 적용해주세요.
+해당 프로젝트는 2023년 2학기 CoMit 홍보부스에서 활용하기위해 제작된 스피드 퀴즈 앱입니다. data class 생성을 용이하게 하기위해 freezed패키지를 사용했습니다.
 
 ### Projecct Structure
 - <b>constants</b> : textStyles, gap(SizedBox), palette가 정의되어있습니다.
