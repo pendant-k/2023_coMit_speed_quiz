@@ -1,10 +1,7 @@
 import 'package:comit_quiz/constants/app_text_styles.dart';
-import 'package:comit_quiz/constants/gaps.dart';
 import 'package:comit_quiz/constants/palette.dart';
 import 'package:comit_quiz/presentation/common_widgets/main_button_widget.dart';
-import 'package:comit_quiz/presentation/common_widgets/second_button_widget.dart';
 import 'package:comit_quiz/presentation/home/home_screen.dart';
-import 'package:comit_quiz/presentation/leaderboard/leaderboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
