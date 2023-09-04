@@ -37,6 +37,7 @@ dependencies:
     flutter_screenutil: ^5.9.0
     freezed_annotation: ^2.4.1
     json_annotation: ^4.8.1
+    circular_countdown_timer: ^0.2.3
 
 dev_dependencies:
     flutter_test:

@@ -1,6 +1,11 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:comit_quiz/constants/app_text_styles.dart';
 import 'package:comit_quiz/constants/palette.dart';
+import 'package:comit_quiz/constants/questions.dart';
 import 'package:comit_quiz/domain/question.dart';
+import 'package:comit_quiz/presentation/common_widgets/second_button_widget.dart';
+import 'package:comit_quiz/presentation/form/leaderboard_form.dart';
+import 'package:comit_quiz/utils/shuffle_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,196 +19,16 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+  final CountDownController _controller = CountDownController();
+
   // get question list
 
   // shuffle question list and set to questions
 
-  List<Question> questions = [
-    const Question(
-      id: 1,
-      type: QuestionType.ox,
-      body: '코밋 홈페이지는 크리스마스 당일에 완성되었다.',
-      answer: "o",
-    ),
-    const Question(
-      id: 2,
-      type: QuestionType.choices,
-      body: '저번학기 (2023-1) CoMit이 진행했던 활동은 무엇일까요?',
-      answer: "4", // 보기: 개강총회, 종강총회, OT, 전부
-    ),
-    const Question(
-      id: 3,
-      type: QuestionType.shortAnswer,
-      body: 'CoMit 홈페이지가 완성된 년도는 언제일까요?(숫자로만)',
-      answer: "2021",
-    ),
-    const Question(
-      id: 4,
-      type: QuestionType.shortAnswer,
-      body: '동아리 이름인 CoMit은 Coding과 영어 단어 하나를 합쳐 만들었습니다.'
-          ' 이 단어는 무엇일까요?',
-      answer: "summit",
-    ),
-    const Question(
-      id: 5,
-      type: QuestionType.ox,
-      body: 'CoMit은 누구나 스터디를 열어 다른 사람들과 함께 진행할 수 있으며,'
-          ' 선발 방식과 인원 수에 제한은 없다.',
-      answer: "x",
-    ),
-    const Question(
-      id: 6,
-      type: QuestionType.choices,
-      body: '파이썬 로고에 형상되어 있는 동물은 무엇일까요?',
-      answer: "4", //보기: 거북이, 용, 사자, 뱀
-    ),
-    const Question(
-      id: 7,
-      type: QuestionType.shortAnswer,
-      body: '주어진 수들 중에서 짝수의 합을 계산하는 프로그램을 만드려고 합니다.'
-          ' 다음 빈칸에 들어갈 코드는 무엇일까요?\n'
-          'for num in numbers:\n'
-          '  if num % 2 != 0:\n'
-          '     ______\n'
-          '     sum += num',
-      answer: "continue",
-    ),
-    const Question(
-      id: 8,
-      type: QuestionType.ox,
-      body: 'Java Script는 Java의 업그레이드 버전이다.',
-      answer: "x",
-    ),
-    const Question(
-      id: 9,
-      type: QuestionType.choices,
-      body: ' 파이썬 공식문서에서 권장하는 문법규칙이 아닌 것을 고르세요.',
-      answer: "2",
-      // 보기
-      // 1. 한 줄은 79글자로 제한하기
-      // 2. import는 파일의 맨 아래 적고 내장 모듈, 제3자 모듈, 직접 만든 모듈 순서로 불러들이기
-      // 3. 인스턴스 메서드의 첫 인자는 self로 쓰고, 클래스 메서드의 첫 인자는 cls로 쓰기
-      // 4. 할당 연산자(=)의 앞뒤로 공백 넣기
-    ),
-    const Question(
-      id: 10,
-      type: QuestionType.choices,
-      body: '파이썬이 최초 공개된 출시년도는 언제일까요?',
-      answer: "2", //보기: 1987, 1991, 1998, 2002
-    ),
-    const Question(
-      id: 11,
-      type: QuestionType.choices,
-      body: '코밋동아리의 회장 이름은 무엇일까요?',
-      answer: "3", //보기: 박지현, 박지환, 박태곤, 박지훈
-    ),
-    const Question(
-      id: 12,
-      type: QuestionType.ox,
-      body: 'Comit은 Coding summit의 줄임말이다. ',
-      answer: "o",
-    ),
-    const Question(
-      id: 13,
-      type: QuestionType.choices,
-      body: '현재 코밋동아리에서 다루지 않는 언어는 무엇일까요?',
-      answer: "4", //보기: HTML, CSS, Javascript, Python
-    ),
-    const Question(
-      id: 14,
-      type: QuestionType.ox,
-      body: '코밋동아리 인스타 계정 아이디는 comit_skku이다.',
-      answer: "x",
-    ),
-    const Question(
-      id: 15,
-      type: QuestionType.choices,
-      body: 'Comit 동아리방 위치는 어디일까요?',
-      answer: "3",
-      //보기
-      // 1. 인문사회과학캠퍼스 - 600주년기념관
-      // 2. 자연과학캠퍼스 - 삼성학술정보관
-      // 3. 자연과학캠퍼스 - 학생회관
-      // 4. 인문사회과학캠퍼스 - 수선관
-    ),
-    const Question(
-      id: 16,
-      type: QuestionType.ox,
-      body: '열린 스터디클럽 중에 ‘앱 개발’이 포함되어 있다.',
-      answer: "o",
-    ),
-    const Question(
-      id: 17,
-      type: QuestionType.ox,
-      body: ' C언어는 B언어 이후라서 C언어이다.',
-      answer: "o",
-    ),
-    const Question(
-      id: 18,
-      type: QuestionType.choices,
-      body: '성균관대학교에 포함되지 않는 한자는 무엇일까요?',
-      answer: "4", //보기: 均, 館, 成, 旬
-    ),
-    const Question(
-      id: 19,
-      type: QuestionType.choices,
-      body: '코밋 로고에서 노란색 문자는 무엇일까요?',
-      answer: "3", //보기: O, C, M, T
-    ),
-    const Question(
-      id: 20,
-      type: QuestionType.choices,
-      body: '코밋 전 로고 동물은 무엇일까요?',
-      answer: "1", //보기: 부엉이, 올빼미, 독수리, 생쥐
-    ),
-    const Question(
-      id: 21,
-      type: QuestionType.choices,
-      body: 'ReLU는',
-      answer: "2",
-      // 보기
-      // 1. 딥러닝 모델이다
-      // 2. 활성화 함수이다
-      // 3. 하이퍼파라미터다
-      // 4. 옵티마이저다
-    ),
-    const Question(
-      id: 22,
-      type: QuestionType.ox,
-      body: 'CNN은 자연어를 처리하기위한 딥러닝 모델이다',
-      answer: "x",
-    ),
-    const Question(
-      id: 23,
-      type: QuestionType.choices,
-      body: '코밋 운영진에 없는 팀은 무엇일까요?',
-      answer: "3", //보기: 인사팀, 재무팀, 환경미화팀, 홍보팀
-    ),
-    const Question(
-      id: 24,
-      type: QuestionType.choices,
-      body: 'CoMit에 관한 설명으로 올바른 것은 무엇일까요?',
-      answer: "2",
-      // 보기
-      // 1. 율전 캠퍼스 학생들만 지원 가능하다.
-      // 2. 2023학년도 명품스터디학회에 선정되었다.
-      // 3. 스터디 활동은 개설된 스터디만 참여 가능하다.
-      // 4. 학구적인 성격을 띠기 때문에 취미로 코딩을 공부하는 학생들은 지원 불가능하다.
-    ),
-    const Question(
-      id: 25,
-      type: QuestionType.choices,
-      body: 'chatGPT에서 GPT는 어떤 단어의 줄임말일까?',
-      answer: "1",
-      // 보기
-      // 1. Generative Pretrained Transformer
-      // 2. Great Processing Translator
-      // 3. Gorgeous Perfect Teacher
-      // 4. Google Paypal Twitter
-    ),
-  ];
+  // question list
+  // 랜덤한 순서로 셔플하기
+  final List<Question> shuffledQuestions = questions;
 
-  // current question index
   var currentIndex = 0;
 
   // 맞춘 문제 개수
@@ -219,6 +44,21 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   submitAnswer() {
+    if (selectedAnswer == shuffledQuestions[currentIndex].answer) {
+      answerCount++;
+    }
+    if (shuffledQuestions.length > currentIndex + 1) {
+      currentIndex++;
+      resetStates();
+    } else {
+      // 결과 페이지로 넘어가기
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => LeaderBoardForm(
+                    score: answerCount,
+                  )));
+    }
     // 정답인지 확인
     // 맞으면 answerCount + 1
     // 다음 문제로 넘어가기
@@ -227,17 +67,190 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   // 현재 문제의 type에 따라서 적절한 widget build
-  Widget buildAnswerWidgets(QuestionType type) {
-    switch (type) {
+  Widget buildAnswerWidgets(Question question) {
+    switch (question.type) {
       case QuestionType.choices:
         return Wrap(
-          children: [],
+          spacing: 51.w,
+          runSpacing: 50.h,
+          children: [
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  selectedAnswer = "1";
+                });
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color: selectedAnswer == "1"
+                      ? Palette.purple80
+                      : Colors.transparent,
+                ),
+                child: Text(
+                  "① ${question.choices![0]}",
+                  style: AppTextStyle.choice,
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  selectedAnswer = "2";
+                });
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color: selectedAnswer == "2"
+                      ? Palette.purple80
+                      : Colors.transparent,
+                ),
+                child: Text(
+                  "② ${question.choices![1]}",
+                  style: AppTextStyle.choice,
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  selectedAnswer = "3";
+                });
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color: selectedAnswer == "3"
+                      ? Palette.purple80
+                      : Colors.transparent,
+                ),
+                child: Text(
+                  "③ ${question.choices![2]}",
+                  style: AppTextStyle.choice,
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  selectedAnswer = "4";
+                });
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color:
+                      selectedAnswer == "4" ? Palette.purple80 : Colors.white,
+                ),
+                child: Text(
+                  "④ ${question.choices![3]}",
+                  style: AppTextStyle.choice,
+                ),
+              ),
+            ),
+          ],
         );
       case QuestionType.shortAnswer:
-        return TextField();
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              '답 : ',
+              style: AppTextStyle.choice,
+            ),
+            gap34w,
+            SizedBox(
+              width: 480.w,
+              height: 56.h,
+              child: TextField(
+                autocorrect: false,
+                autofocus: true,
+                onChanged: (value) {
+                  setState(() {
+                    selectedAnswer = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: Palette.purple95, width: 2),
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: Palette.purple40, width: 2),
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
       case QuestionType.ox:
         return Row(
-          children: [],
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  selectedAnswer = "o";
+                });
+              },
+              child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.r),
+                    color: selectedAnswer == "o"
+                        ? Palette.purple80
+                        : Palette.purple95,
+                  ),
+                  child: Icon(
+                    Icons.circle_outlined,
+                    size: 55.w,
+                    color: Palette.purple10,
+                    grade: 10,
+                  )),
+            ),
+            SizedBox(
+              width: 30.w,
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  selectedAnswer = "x";
+                });
+              },
+              child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.r),
+                    color: selectedAnswer == "x"
+                        ? Palette.purple80
+                        : Palette.purple95,
+                  ),
+                  child: Icon(
+                    Icons.close_outlined,
+                    size: 55.w,
+                    color: Palette.purple10,
+                    grade: 10,
+                  )),
+            ),
+          ],
         );
       default:
         return const SizedBox();
@@ -245,16 +258,22 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   @override
+  void initState() {
+    shuffledQuestions.shuffle();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        centerTitle: false,
-        leading: const SizedBox(),
-        title: Padding(
-          padding: EdgeInsets.only(left: 252.w),
-          child: const Text('Logo'),
-        ),
-      ),
+          centerTitle: false,
+          leading: const SizedBox(),
+          title: Image.asset(
+            'assets/images/Header.png',
+            height: 60.h,
+          )),
       body: SizedBox(
           width: double.infinity,
           child: Column(
@@ -262,6 +281,28 @@ class _QuizScreenState extends State<QuizScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              CircularCountDownTimer(
+                width: 100.w,
+                height: 100.w,
+                duration: 40,
+                fillColor: Palette.purple80,
+                ringColor: Palette.purple10,
+                isReverse: true,
+                textStyle: TextStyle(
+                  fontFamily: "Gmarket",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30.spMin,
+                ),
+                onComplete: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LeaderBoardForm(
+                                score: answerCount,
+                              )));
+                },
+              ),
+              gap15h,
               Text(
                 'Q${currentIndex + 1}.',
                 textAlign: TextAlign.center,
@@ -273,7 +314,6 @@ class _QuizScreenState extends State<QuizScreen> {
               gap30h,
               Container(
                 width: 936.w,
-                height: 200.h,
                 padding: EdgeInsets.symmetric(horizontal: 96.w, vertical: 48.h),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.r),
@@ -281,14 +321,20 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
                 child: Text(
                   // question text
-                  questions[currentIndex].body,
+                  shuffledQuestions[currentIndex].body,
                   textAlign: TextAlign.center,
                   style: AppTextStyle.question,
                 ),
               ),
               gap70h,
               // select answer side
-              buildAnswerWidgets(questions[currentIndex].type),
+              buildAnswerWidgets(shuffledQuestions[currentIndex]),
+              SizedBox(height: 100.h),
+              SecondButtonWidget(
+                  onPressed: () {
+                    submitAnswer();
+                  },
+                  title: '제출하기'),
             ],
           )),
     );

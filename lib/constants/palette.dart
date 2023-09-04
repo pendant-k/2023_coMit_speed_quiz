@@ -6,5 +6,6 @@ class Palette {
   static const purple50 = Color(0xff7D63C3);
   static const purple60 = Color(0xff9A82DB);
   static const purple80 = Color(0xFFD0BCFF);
+  static const purple90 = Color(0xffeaddff);
   static const purple95 = Color(0xfff6edff);
 }

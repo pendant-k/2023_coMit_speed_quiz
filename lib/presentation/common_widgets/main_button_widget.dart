@@ -16,6 +16,7 @@ class MainButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        backgroundColor: Palette.purple90,
         padding: EdgeInsets.symmetric(
           horizontal: 40.w,
           vertical: 18.h,

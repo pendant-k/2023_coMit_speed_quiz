@@ -24,6 +24,7 @@ mixin _$Question {
   QuestionType get type => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
   String get answer => throw _privateConstructorUsedError;
+  List<String>? get choices => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,12 @@ abstract class $QuestionCopyWith<$Res> {
   factory $QuestionCopyWith(Question value, $Res Function(Question) then) =
       _$QuestionCopyWithImpl<$Res, Question>;
   @useResult
-  $Res call({int id, QuestionType type, String body, String answer});
+  $Res call(
+      {int id,
+      QuestionType type,
+      String body,
+      String answer,
+      List<String>? choices});
 }
 
 /// @nodoc
@@ -56,6 +62,7 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
     Object? type = null,
     Object? body = null,
     Object? answer = null,
+    Object? choices = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -74,6 +81,10 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
               as String,
+      choices: freezed == choices
+          ? _value.choices
+          : choices // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -85,7 +96,12 @@ abstract class _$$_QuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
       __$$_QuestionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, QuestionType type, String body, String answer});
+  $Res call(
+      {int id,
+      QuestionType type,
+      String body,
+      String answer,
+      List<String>? choices});
 }
 
 /// @nodoc
@@ -103,6 +119,7 @@ class __$$_QuestionCopyWithImpl<$Res>
     Object? type = null,
     Object? body = null,
     Object? answer = null,
+    Object? choices = freezed,
   }) {
     return _then(_$_Question(
       id: null == id
@@ -121,6 +138,10 @@ class __$$_QuestionCopyWithImpl<$Res>
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
               as String,
+      choices: freezed == choices
+          ? _value._choices
+          : choices // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -132,7 +153,9 @@ class _$_Question implements _Question {
       {required this.id,
       required this.type,
       required this.body,
-      required this.answer});
+      required this.answer,
+      final List<String>? choices})
+      : _choices = choices;
 
   factory _$_Question.fromJson(Map<String, dynamic> json) =>
       _$$_QuestionFromJson(json);
@@ -145,10 +168,19 @@ class _$_Question implements _Question {
   final String body;
   @override
   final String answer;
+  final List<String>? _choices;
+  @override
+  List<String>? get choices {
+    final value = _choices;
+    if (value == null) return null;
+    if (_choices is EqualUnmodifiableListView) return _choices;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'Question(id: $id, type: $type, body: $body, answer: $answer)';
+    return 'Question(id: $id, type: $type, body: $body, answer: $answer, choices: $choices)';
   }
 
   @override
@@ -159,12 +191,14 @@ class _$_Question implements _Question {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.body, body) || other.body == body) &&
-            (identical(other.answer, answer) || other.answer == answer));
+            (identical(other.answer, answer) || other.answer == answer) &&
+            const DeepCollectionEquality().equals(other._choices, _choices));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, type, body, answer);
+  int get hashCode => Object.hash(runtimeType, id, type, body, answer,
+      const DeepCollectionEquality().hash(_choices));
 
   @JsonKey(ignore: true)
   @override
@@ -185,7 +219,8 @@ abstract class _Question implements Question {
       {required final int id,
       required final QuestionType type,
       required final String body,
-      required final String answer}) = _$_Question;
+      required final String answer,
+      final List<String>? choices}) = _$_Question;
 
   factory _Question.fromJson(Map<String, dynamic> json) = _$_Question.fromJson;
 
@@ -197,6 +232,8 @@ abstract class _Question implements Question {
   String get body;
   @override
   String get answer;
+  @override
+  List<String>? get choices;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionCopyWith<_$_Question> get copyWith =>

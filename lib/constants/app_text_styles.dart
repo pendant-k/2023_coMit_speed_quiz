@@ -17,4 +17,9 @@ class AppTextStyle {
     color: Colors.black,
     letterSpacing: 0.1,
   );
+
+  static final choice = TextStyle(
+    fontSize: 22.spMin,
+    fontWeight: FontWeight.w700,
+  );
 }

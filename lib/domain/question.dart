@@ -21,6 +21,7 @@ class Question with _$Question {
     required QuestionType type,
     required String body,
     required String answer,
+    List<String>? choices,
   }) = _Question;
 
   factory Question.fromJson(Map<String, dynamic> json) =>

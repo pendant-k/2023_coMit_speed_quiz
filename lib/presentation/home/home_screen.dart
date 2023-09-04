@@ -1,3 +1,4 @@
+import 'package:comit_quiz/constants/app_text_styles.dart';
 import 'package:comit_quiz/constants/gaps.dart';
 import 'package:comit_quiz/constants/palette.dart';
 import 'package:comit_quiz/presentation/common_widgets/main_button_widget.dart';
@@ -16,52 +17,59 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // Image.asset(
-          //   'assets/images/logo.png',
-          //   width: 200.w,
-          // ),
-          CircleAvatar(
-            radius: 100.w,
-          ),
-          gap64h,
-          Row(
-            mainAxisSize: MainAxisSize.max,
+        backgroundColor: Colors.white,
+        body: SizedBox(
+          width: double.infinity,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              MainButtonWidget(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const QuizScreen(),
-                    ),
-                  );
-                },
-                title: 'START',
+              Image.asset(
+                'assets/images/Comit_logo.png',
+                width: 191.w,
+                height: 219.h,
               ),
-              gap34w,
-              SecondButtonWidget(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LeaderBoardScreen(),
-                    ),
-                  );
-                },
-                title: 'Go to Leaderboard',
+              Text(
+                'COM!T QUIZ',
+                style: AppTextStyle.choice.copyWith(
+                  fontFamily: 'Gmarket',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 32.spMin,
+                ),
+              ),
+              gap64h,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  MainButtonWidget(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const QuizScreen(),
+                        ),
+                      );
+                    },
+                    title: 'START',
+                  ),
+                  // gap34w,
+                  // SecondButtonWidget(
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => const LeaderBoardScreen(),
+                  //       ),
+                  //     );
+                  //   },
+                  //   title: 'Go to Leaderboard',
+                  // ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
 }
